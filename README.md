@@ -57,3 +57,14 @@ ps:看到git地址后面括号里的，其实就能明白意思了，就是告�
 
 * 清除存储密码
 >git config --system --unset credential.helper
+
+* git克隆某一个分支最近的10次commit
+>git clone -b exchange_dev --single-branch --depth 10 https://github.com/rylink/wallet-android.git
+
+* git clone --depth=1 后获取其他分支
+>1.先转换存储库为完整存储库
+git pull --unshallow或git fetch  --unshallow
+2.修改.git文件夹内config文件的[remote "origin"]节的内容
+fetch = +refs/heads/master:refs/remotes/origin/master中的master改成*或git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+3. 然后执行以下命令获取所有分支
+git fetch -pv
